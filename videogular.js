@@ -818,7 +818,7 @@ angular.module("com.2fdevs.videogular")
                     if (VG_UTILS.isMobileDevice()) API.mediaElement[0].load();
 
                     $timeout(function () {
-                        if (API.autoPlay && !VG_UTILS.isMobileDevice()) {
+                        if (API.autoPlay && (VG_UTILS.isCordova() || !VG_UTILS.isMobileDevice())) {
                             API.play();
                         }
                     });
@@ -1452,6 +1452,10 @@ angular.module("com.2fdevs.videogular")
 
         this.isiOSDevice = function () {
             return (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPod/i) || navigator.userAgent.match(/iPad/i));
+        };
+
+        this.isCordova = function () {
+            return document.URL.indexOf('http://') === -1 && document.URL.indexOf('https://') === -1;
         };
 
         /**
